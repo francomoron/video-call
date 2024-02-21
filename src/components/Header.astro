@@ -1,0 +1,26 @@
+---
+import LanguagesButton from "@components/LanguagesButton.astro";
+import SingInButton from "@components/SingInButton.astro";
+---
+
+<header>
+    <div>Logo</div>
+    <div class="right-container">
+        <LanguagesButton />
+        <SingInButton />
+    </div>
+    <style>
+        header {
+            height: 80px;
+            padding: 8px 32px;
+            border-bottom: 1px solid var(--blackColor3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--blackColor1);
+        }
+        .right-container {
+            display: flex;
+        }
+    </style>
+</header>

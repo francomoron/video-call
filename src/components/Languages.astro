@@ -1,0 +1,58 @@
+---
+import { languages } from "@i18n/ui";
+import {
+    useTranslatedPath,
+    getLangFromUrl,
+    getRouteFromUrl,
+} from "@i18n/utils";
+const route = getRouteFromUrl(Astro.url);
+const langSelected = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(langSelected);
+const { id } = Astro.props;
+---
+
+<ul id={id}>
+    {
+        Object.entries(languages).map(([lang, label]) => (
+            <li class={lang == langSelected ? "selected" : "no-selected"}>
+                <a href={translatePath(`/${route ? route : ""}`, lang)}>
+                    {label}
+                </a>
+            </li>
+        ))
+    }
+</ul>
+<style>
+    .active {
+        display: flex;
+    }
+    ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: var(--blackColor3);
+        margin: 8px 0px 0px 0px;
+        width: 100%;
+        padding: 8px;
+        border-radius: 8px;
+    }
+    ul a {
+        color: var(--whiteColor1);
+        width: 100%;
+        height: 100%;
+        padding: 8px;
+    }
+    ul .selected {
+        display: none;
+    }
+    ul li {
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+    }
+    ul li:hover {
+        background-color: var(--blackColor2);
+    }
+</style>

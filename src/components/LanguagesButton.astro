@@ -1,0 +1,22 @@
+---
+import { languages } from "@i18n/ui";
+import { getLangFromUrl } from "@i18n/utils";
+
+const langSelected = getLangFromUrl(Astro.url);
+import TranslateIcon from "@icons/TranslateIcon.astro";
+import Tag from "./Tag.astro";
+import Languages from "./Languages.astro";
+---
+
+<Tag text={languages[langSelected]} isDark={true} id="languageSelected">
+    <TranslateIcon slot="first-icon" />
+    <Languages slot="hidden" id="languages" />
+</Tag>
+
+<script>
+    const languageSelected = document.getElementById("languageSelected");
+    const languages = document.getElementById("languages");
+    languageSelected?.addEventListener("click", (e) => {
+        languages?.classList.toggle("active");
+    });
+</script>

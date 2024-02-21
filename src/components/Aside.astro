@@ -1,0 +1,71 @@
+---
+import Cross from "@icons/Cross.astro";
+---
+
+<aside id="aside">
+    <header>
+        <h3>Este es chat</h3>
+        <Cross id="cross-icon-aside" />
+    </header>
+</aside>
+
+<style>
+    .active {
+        display: block;
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background-color: var(--whiteColor1);
+        width: 35%;
+        height: calc(100% - 16px);
+        border-radius: 8px;
+    }
+    aside {
+        display: none;
+    }
+    header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+    }
+    h3 {
+        color: var(--blackColor3);
+        margin: 16px 0;
+    }
+</style>
+
+<script>
+    const messageIcon = document.getElementById("message-icon");
+    const cross = document.getElementById("cross-icon-aside");
+    const aside = document.getElementById("aside");
+    const userGroupAsideIcon = document.getElementById("user-group-aside-icon");
+
+    messageIcon?.addEventListener("click", (e) => {
+        aside?.classList.toggle("active");
+        if (aside?.classList.contains("active")) {
+            if (aside.classList.contains("meeting-users")) {
+                aside.classList.remove("meeting-users");
+            }
+            if (!aside.classList.contains("chat")) {
+                aside.classList.add("chat");
+            }
+        }
+    });
+    userGroupAsideIcon?.addEventListener("click", (e) => {
+        aside?.classList.toggle("active");
+        if (aside?.classList.contains("active")) {
+            if (aside.classList.contains("chat")) {
+                aside.classList.remove("chat");
+            }
+            if (!aside.classList.contains("meeting-users")) {
+                aside.classList.add("meeting-users");
+            }
+        }
+    });
+
+    cross?.addEventListener("click", (e) => {
+        aside?.classList.toggle("active");
+    });
+</script>

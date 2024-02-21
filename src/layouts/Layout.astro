@@ -1,0 +1,70 @@
+---
+interface Props {
+	title: string;
+	langSelected: string;
+}
+
+const { title, langSelected } = Astro.props;
+---
+
+<!doctype html>
+<html lang={langSelected}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+<style is:global>
+	:root {
+		--whiteColor1: #dedede;
+		--whiteColor2: #888888;
+		--blackColor1: #0a0a0a;
+		--blackColor2: #171717;
+		--blackColor3: #202020;
+		--purpleColor1: #8f7edf;
+		--redColor1: rgb(177, 15, 15);
+	}
+	* {
+		box-sizing: border-box;
+	}
+	html {
+		font-size: 8px;
+	}
+	li {
+		list-style: none;
+	}
+	a {
+		color: var(--whiteColor1);
+		text-decoration: none;
+		font-size: 16px;
+	}
+	p {
+		font-size: 14px;
+		margin: 0;
+	}
+
+	body {
+		background-color: #0a0a0a;
+		background-image: linear-gradient(#907edf06 1.3px, transparent 1.3px),
+			linear-gradient(to right, #907edf06 1.3px, #0a0a0a 1.3px);
+		background-size: 104px 104px;
+		color: var(--whiteColor1);
+		font-family: "Google Sans Display", Roboto, Arial, sans-serif;
+		letter-spacing: 0;
+		font-weight: bold;
+		font-size: 4rem;
+		min-height: 100dvh;
+		margin: 0;
+	}
+	@media (max-width: 500px) {
+		html {
+			font-size: 5px;
+		}
+	}
+</style>

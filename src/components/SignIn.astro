@@ -1,0 +1,68 @@
+---
+import Cross from "@icons/Cross.astro";
+const { id } = Astro.props;
+---
+
+<!-- Simple pop-up dialog box, containing a form -->
+<dialog id={id}>
+    <div>
+        <header>
+            <h2>title</h2>
+            <Cross id="cross-icon-signin" />
+        </header>
+        <form method="dialog">
+            <input type="email" name="email" id="email" />
+            <input type="password" name="password" id="password" />
+            <button type="submit">Sign In</button>
+        </form>
+        <footer>
+            <p>¿No tienes cuenta? <a href="">Registrarse</a></p>
+        </footer>
+    </div>
+</dialog>
+
+<style>
+    dialog {
+        width: 40dvw;
+        height: 85dvh;
+        padding: 16px;
+    }
+    .close {
+        display: none;
+    }
+    div,
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+    div {
+        height: 100%;
+        width: 100%;
+        justify-content: space-between;
+    }
+    header {
+        display: flex;
+        justify-content: space-between;
+    }
+    h2 {
+        margin: 16px 0;
+    }
+    input,
+    button {
+        margin: 8px 0;
+    }
+</style>
+
+<script>
+    const signIn = document.getElementById("sign-in");
+    const modal = document.getElementById("modal");
+    const crossIcon = document.getElementById("cross-icon-signin");
+
+    signIn?.addEventListener("click", (e) => {
+        modal?.showModal();
+    });
+
+    crossIcon?.addEventListener("click", (e) => {
+        modal?.close();
+    });
+</script>

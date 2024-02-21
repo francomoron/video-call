@@ -1,0 +1,111 @@
+---
+const { t } = Astro.props;
+import { useTranslatedPath, getLangFromUrl } from "@i18n/utils";
+const langSelected = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(langSelected);
+let token = crypto.randomUUID();
+---
+
+<main>
+    <header>
+        <h1>{t("index.title")}</h1>
+
+        <h2>{t("index.subtitle")}</h2>
+        <p>
+            {t("index.description")}
+        </p>
+    </header>
+    <section>
+        <a href={translatePath(`/${token}`, langSelected)}
+            >{t("index.createMeetingButton")}</a
+        >
+        <form>
+            <input
+                id="url"
+                required
+                pattern="https://video-chat/.*"
+                size="30"
+                type="url"
+                placeholder="https://video-chat/sdajn54fg"
+            />
+            <button type="submit">{t("index.joinMeetingButton")}</button>
+        </form>
+    </section>
+    <style>
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 800px;
+            margin: 32px auto;
+            padding: 16px;
+            text-align: center;
+        }
+        form,
+        a {
+            margin: 16px;
+        }
+        section {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 32px 0;
+        }
+        a,
+        input {
+            display: flex;
+            font-size: 2rem;
+            justify-content: center;
+            align-items: center;
+            padding: 16px 32px;
+            border-radius: 8px;
+            border-style: none;
+        }
+        form input[type="url"]:required:valid + button {
+            opacity: 1;
+        }
+        form input[type="url"]:required:valid:focus {
+            border: 1px solid var(--purpleColor1);
+        }
+
+        a {
+            background-color: var(--purpleColor1);
+            text-decoration: none;
+            color: var(--blackColor1);
+        }
+        form {
+            display: flex;
+        }
+        input {
+            background-color: var(--blackColor1);
+            border: 1px solid var(--whiteColor1);
+            color: var(--whiteColor1);
+            outline: none;
+        }
+        button {
+            background-color: #0a0a0a76;
+            border-style: none;
+            color: var(--purpleColor1);
+            opacity: 0.8;
+            font-size: 2rem;
+            margin-left: 8px;
+        }
+        h1,
+        h2,
+        h3 {
+            text-wrap: balance;
+        }
+        p {
+            text-wrap: pretty;
+            color: var(--whiteColor2);
+            font-size: 2rem;
+        }
+        h2 {
+            color: var(--purpleColor1);
+            font-size: 3rem;
+            text-align: left;
+        }
+    </style>
+</main>

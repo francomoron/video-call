@@ -1,0 +1,125 @@
+---
+/* ICONS */
+import Message from "@icons/Message.astro";
+import MicrophoneOff from "@icons/MicrophoneOff.astro";
+import MicrophoneOn from "@icons/MicrophoneOn.astro";
+import PhoneHangup from "@icons/PhoneHangup.astro";
+import UserGroup from "@icons/UserGroup.astro";
+import VideoOn from "@icons/VideoOn.astro";
+import VideoOff from "@icons/VideoOff.astro";
+import { useTranslations, getLangFromUrl } from "../i18n/utils";
+/* END ICONS */
+
+import Aside from "@components/Aside.astro";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { token } = Astro.props;
+---
+
+<main>
+    <div class="screen-container">
+        <video id="screen" autoplay playsinline></video>
+    </div>
+    <Aside />
+</main>
+
+<footer>
+    <div class="left-controll">
+        <div class="date" id="date"></div>
+        <div class="token">
+            {token}
+        </div>
+    </div>
+    <div class="center-controll">
+        <MicrophoneOn />
+        <VideoOn />
+        <PhoneHangup />
+    </div>
+    <div class="right-controll">
+        <UserGroup id="user-group-aside-icon" />
+        <Message id="message-icon" />
+    </div>
+</footer>
+
+<style>
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--blackColor1);
+        width: 100dvw;
+        height: 85dvh;
+        position: relative;
+        padding-top: 16px;
+    }
+    .screen-container {
+        width: 90%;
+        height: 100%;
+        background-image: url(https://www.svgrepo.com/show/97385/no-photo.svg);
+        background-size: contain;
+        background-position: center;
+        background-color: var(--blackColor3);
+        background-repeat: no-repeat;
+    }
+    video {
+        width: 100%;
+        height: 100%;
+    }
+    footer {
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--blackColor1);
+        width: 100dvw;
+        height: 15dvh;
+    }
+    .left-controll {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+    }
+    .date,
+    .token {
+        padding: 0 16px;
+    }
+    .date {
+        border-right: 1px solid var(--whiteColor2);
+    }
+
+    .center-controll {
+        display: flex;
+    }
+    .right-controll {
+        display: flex;
+    }
+</style>
+
+<script>
+    //  TIMER
+    const dateElement = document.getElementById("date");
+    currentTime();
+
+    function currentTime() {
+        let date = new Date();
+        let hour =
+            date.getHours() < 10
+                ? `0${date.getHours()}`
+                : date.getHours().toString();
+        let minute =
+            date.getMinutes() < 10
+                ? `0${date.getMinutes()}`
+                : date.getMinutes().toString();
+
+        let time = `<p>${hour}: ${minute}</p>`;
+
+        let nextSecond = 60 - date.getSeconds();
+        let timer = nextSecond * 1000;
+
+        setTimeout(currentTime, timer);
+        dateElement.innerHTML = time;
+    }
+    //  --- END TIMER ---
+</script>
+
+<script src="../scripts/meeting.js"></script>

@@ -1,0 +1,45 @@
+---
+const { text, id, isDark } = Astro.props;
+---
+
+<div id={id} class=`button-container ${isDark? "dark": ""}`>
+    <div>
+        <slot name="first-icon" />
+        <p>{text}</p>
+    </div>
+    <slot name="hidden" />
+</div>
+
+<style>
+    .button-container {
+        margin: 0 8px;
+    }
+    .dark {
+        background-color: var(--blackColor3);
+        fill: var(--whiteColor1);
+    }
+    .dark div {
+        color: var(--whiteColor1);
+    }
+    div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 32px;
+        padding: 6px;
+        background-color: var(--whiteColor1);
+        border-radius: 8px;
+        position: relative;
+        color: var(--blackColor3);
+        cursor: pointer;
+    }
+    div div {
+        background-color: transparent;
+    }
+    .dark:hover {
+        background-color: var(--blackColor2);
+    }
+    div:hover {
+        background-color: #cacaca;
+    }
+</style>
